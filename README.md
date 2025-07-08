@@ -1,4 +1,4 @@
-```
+⁸```
 ███╗   ███╗ ██████╗ ███╗   ██╗ ██████╗ ███╗   ██╗███████╗███████╗██████╗ 
 ████╗ ████║██╔═══██╗████╗  ██║██╔═══██╗████╗  ██║██╔════╝██╔════╝██╔══██╗
 ██╔████╔██║██║   ██║██╔██╗ ██║██║   ██║██╔██╗ ██║█████╗  █████╗  ██████╔╝
@@ -26,7 +26,7 @@
 
 <div align="center">
 
-[![Twitter](https://img.shields.io/badge/Twitter-%23000000.svg?style=for-the-badge&logo=Twitter&logoColor=white)](https://twitter.com/cacophonn)
+[![Twitter](https://img.shields.io/badge/Twitter-%23000000.svg?style=for-the-badge&logo=Twitter&logoColor=white)](https://twitter.com/mononeer)
 [![Blog](https://img.shields.io/badge/Blog-%23000000.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/cacophonn)
 [![GitHub](https://img.shields.io/badge/GitHub-%23000000.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/mononeer)
 
