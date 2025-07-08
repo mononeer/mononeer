@@ -17,7 +17,7 @@
 - 🔭 I'm passionate about experimenting with new technologies
 - 🌱 Currently exploring and learning new things
 - 💬 Let's talk about technology, innovation, and creative ideas
-- 🌐 Check out my work at [github.com/cacophonn](https://github.com/cacophonn)
+- 🌐 Check out my work at [github.com/cacophonn](https://github.com/mononeer)
 
 ## 🛠️ Tech Stack
 
