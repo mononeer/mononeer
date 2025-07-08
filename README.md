@@ -58,16 +58,3 @@
 
 </div>
 
-<pre>
-┌──────────────────────────────────────────────────┐
-│               CONTRIBUTIONS                      │
-└──────────────────────────────────────────────────┘
-</pre>
-
-<div align="center">
-  <img src="https://github.com/mononeer/mononeer/blob/output/github-contribution-grid-snake-dark.svg" alt="Snake animation" />
-</div>
-
-<div align="center">
-  <img src="https://komarev.com/ghpvc/?username=mononeer&style=for-the-badge&color=000000" alt="Profile Views" />
-</div>
