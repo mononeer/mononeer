@@ -1,79 +1,44 @@
-<p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Courier+New&size=30&duration=4000&pause=1000&color=FFFFFF&center=true&vCenter=true&width=500&height=80&lines=mononeer" alt="mononeer" />
-</p>
+# 👋 Hi, I'm @mononeer
 
-<p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Courier+New&size=18&duration=3000&pause=1000&color=A9A9A9&center=true&width=500&lines=Developer;Creator;Experimenter" alt="Taglines" />
-</p>
+### 💻 Software Developer | 🎮 Game Dev Enthusiast
 
-<div align="center">
+[![GitHub followers](https://img.shields.io/github/followers/mononeer?label=Follow&style=social)](https://github.com/mononeer)
+[![Twitter Follow](https://img.shields.io/twitter/follow/mononeer?style=social)](https://twitter.com/mononeer)
+[![YouTube Channel](https://img.shields.io/badge/YouTube-@mononeer-red)](https://youtube.com/@mononeer)
+[![Twitch Status](https://img.shields.io/badge/Twitch-@mononeer-purple)](https://twitch.tv/mononeer)
+[![Support me on Patreon](https://img.shields.io/badge/Patreon-@mononeer-orange)](https://patreon.com/mononeer)
 
-```diff
-+---------------------------------------------------------------------+
-|                                                                     |
-#                        𝙰𝙱𝙾𝚄𝚃 𝙼𝙴                                  |
-|                                                                     |
-+---------------------------------------------------------------------+
-! 💻 Full-stack developer and open source contributor                |
-! 🧪 Constantly experimenting with new technologies                  |
-! 🎨 Building tools at the intersection of art and technology        |
-! 🌙 Night owl coding enthusiast                                     |
-|                                                                     |
-+---------------------------------------------------------------------+
-```
+## 🔧 Technologies & Skills
 
-</div>
+- 🚀 Full Stack Development
+- 🎮 Game Development
+- 🛠️ Software Architecture
+- 📱 Cross-Platform Development
+- 🤖 Automation & Tooling
+- 🎨 UI/UX Design
 
-<br>
+## 🎯 Featured Project
 
-<div align="center">
+### DemophEngine by Demoph Studios
+An innovative game engine pushing the boundaries of interactive entertainment. Stay tuned for exciting updates!
 
-[![Twitter](https://img.shields.io/badge/Twitter-@mononeer-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/mononeer)
-[![GitHub](https://img.shields.io/badge/GitHub-@mononeer-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/mononeer)
-[![Patreon](https://img.shields.io/badge/Patreon-@mononeer-F96854?style=for-the-badge&logo=patreon&logoColor=white)](https://patreon.com/mononeer)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-@mononeer-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/mononeer)
+## 📊 GitHub Stats
 
-</div>
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=mononeer&show_icons=true&theme=dark)
 
-<br>
+## 🌐 Connect With Me
 
-<div align="center">
+Find me across the web:
+- 🎮 Twitch: [@mononeer](https://twitch.tv/mononeer)
+- 🐦 Twitter/X: [@mononeer](https://twitter.com/mononeer)
+- 📺 YouTube: [@mononeer](https://youtube.com/@mononeer)
+- ❤️ Patreon: [@mononeer](https://patreon.com/mononeer)
 
-```diff
-+---------------------------------------------------------------------+
-|                                                                     |
-#                        𝚃𝙴𝙲𝙷 𝚂𝚃𝙰𝙲𝙺                                |
-|                                                                     |
-+---------------------------------------------------------------------+
-```
+## 🎮 Currently Working On
+- 🚀 DemophEngine improvements
+- 🛠️ Open source contributions
+- 🎨 Creative coding projects
 
-</div>
+---
 
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=js,ts,nodejs,react,nextjs,py,rust,go,docker,kubernetes,aws,git,linux,vim&theme=dark&perline=7" alt="Tech Stack" />
-</p>
-
-<br>
-
-<div align="center">
-
-```diff
-+---------------------------------------------------------------------+
-|                                                                     |
-#                        𝙶𝙸𝚃𝙷𝚄𝙱 𝚂𝚃𝙰𝚃𝚂                              |
-|                                                                     |
-+---------------------------------------------------------------------+
-```
-
-</div>
-
-<p align="center">
-  <a href="https://github.com/mononeer">
-    <img width="49%" src="https://github-readme-streak-stats.herokuapp.com?user=mononeer&theme=github-dark&hide_border=true&date_format=M%20j%5B%2C%20Y%5D&background=00000000" />
-    <img width="49%" src="https://github-readme-stats.vercel.app/api?username=mononeer&show_icons=true&theme=github_dark&hide_border=true&count_private=true&bg_color=00000000" />
-  </a>
-</p>
-
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=mononeer&label=Profile+Views&color=2D3748&style=flat" alt="Profile Views" />
-</p>
+*"Building the future, one commit at a time."*
