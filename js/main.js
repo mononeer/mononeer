@@ -40,7 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fetchGitHubProjects();
     initializeTttGame();
-    initializeChessBoard();
+    if (typeof initializeChessGame === 'function') {
+        initializeChessGame();
+    }
     initializeCalculator();
     initializeSearch();
 });
@@ -134,28 +136,7 @@ function initializeTttGame() {
     setupBoard();
 }
 
-// --- Chess Board Generation ---
-function initializeChessBoard() {
-    const chessBoard = document.getElementById('chess-board');
-    if (!chessBoard) return;
-
-    // Clear the board first
-    chessBoard.innerHTML = '';
-
-    for (let i = 0; i < 64; i++) {
-        const square = document.createElement('div');
-        const row = Math.floor(i / 8);
-        const col = i % 8;
-
-        square.classList.add('chess-square');
-        if ((row + col) % 2 === 0) {
-            square.classList.add('light');
-        } else {
-            square.classList.add('dark');
-        }
-        chessBoard.appendChild(square);
-    }
-}
+// Chess logic is now in js/chess.js
 
 // --- Calculator Logic ---
 function initializeCalculator() {
@@ -300,15 +281,14 @@ function initializeSearch() {
 
     if (!searchInput || !searchContext) return;
 
-    let markInstance = new Mark(searchContext);
-
     function performSearch() {
         const keyword = searchInput.value;
+        // Re-create the Mark instance on each search to handle dynamic content
+        const markInstance = new Mark(searchContext);
 
-        // Unmark previous searches
+        // Unmark previous searches and then mark the new keyword
         markInstance.unmark({
             done: () => {
-                // Mark the new keyword
                 if (keyword.length > 1) { // Only search for keywords longer than 1 character
                     markInstance.mark(keyword, {
                         separateWordSearch: true,
@@ -319,5 +299,10 @@ function initializeSearch() {
         });
     }
 
-    searchInput.addEventListener('input', performSearch);
+    // Debounce the search function to avoid performance issues on every keystroke
+    let debounceTimer;
+    searchInput.addEventListener('input', () => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(performSearch, 300); // Wait 300ms after user stops typing
+    });
 }
