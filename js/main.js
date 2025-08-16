@@ -19,15 +19,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            projectsContainer.classList.add('gallery-container');
             const projectsHTML = projects.map(project => `
-                <div class="project-card">
-                    <h3><a href="${project.html_url}" target="_blank" rel="noopener noreferrer">${project.name}</a></h3>
+                <a href="/project-detail/?repo=${project.name}" class="gallery-item">
+                    <h3>${project.name}</h3>
                     <p>${project.description || 'No description available.'}</p>
                     <div class="project-footer">
                         <span>${project.language ? `Language: ${project.language}` : ''}</span>
                         <span>⭐ ${project.stargazers_count}</span>
                     </div>
-                </div>
+                </a>
             `).join('');
 
             projectsContainer.innerHTML = projectsHTML;

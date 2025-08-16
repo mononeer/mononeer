@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chess - Rendani Manugeni</title>
+    <title>Todo List - Rendani Manugeni</title>
     <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
@@ -22,11 +22,18 @@
     </header>
 
     <main>
-        <section id="games">
-            <h2>Chess</h2>
-            <div class="game-container-full">
-                <div id="chess-status" class="game-status">Turn: White</div>
-                <div id="chess-board" class="game-board"></div>
+        <section id="apps">
+            <h2>Todo List</h2>
+            <div class="app-container-full">
+                <div class="todo-container">
+                    <form id="todo-form">
+                        <input type="text" id="todo-input" placeholder="Add a new task..." autocomplete="off">
+                        <button type="submit">Add Task</button>
+                    </form>
+                    <ul id="todo-list">
+                        <!-- Todo items will be loaded here -->
+                    </ul>
+                </div>
             </div>
         </section>
     </main>
@@ -35,7 +42,6 @@
         <p>&copy; 2024 Rendani Manugeni. All rights reserved.</p>
     </footer>
 
-    <script src="../../js/chess.js"></script>
-    <script src="../../js/main.js"></script>
+    <script src="../../js/todo.js"></script>
 </body>
 </html>
