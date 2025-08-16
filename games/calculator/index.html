@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator - Rendani Manugeni</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/projects/">Projects</a></li>
+                <li><a href="/games/">Games & Apps</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="apps">
+            <h2>Calculator</h2>
+            <div class="app-container-full">
+                 <div id="calculator" class="calculator">
+                    <div id="calculator-display" class="calculator-display">0</div>
+                    <div class="calculator-keys">
+                        <button data-action="clear" class="key--operator">AC</button>
+                        <button data-action="sign" class="key--operator">+/-</button>
+                        <button data-action="percent" class="key--operator">%</button>
+                        <button data-action="divide" class="key--operator">&divide;</button>
+
+                        <button data-number="7">7</button>
+                        <button data-number="8">8</button>
+                        <button data-number="9">9</button>
+                        <button data-action="multiply" class="key--operator">&times;</button>
+
+                        <button data-number="4">4</button>
+                        <button data-number="5">5</button>
+                        <button data-number="6">6</button>
+                        <button data-action="subtract" class="key--operator">-</button>
+
+                        <button data-number="1">1</button>
+                        <button data-number="2">2</button>
+                        <button data-number="3">3</button>
+                        <button data-action="add" class="key--operator">+</button>
+
+                        <button data-number="0" class="key--zero">0</button>
+                        <button data-action="decimal">.</button>
+                        <button data-action="calculate" class="key--equal">=</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Rendani Manugeni. All rights reserved.</p>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+</body>
+</html>
