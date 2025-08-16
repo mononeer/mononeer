@@ -1,0 +1,311 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+body {
+    background-color: #1c2333; /* blue-black */
+    color: #f0f0f0; /* light grey for text */
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #111;
+    padding: 1rem;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #8a2be2;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav a {
+    color: #f0f0f0;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #8a2be2; /* violet */
+}
+
+main {
+    padding: 2rem;
+}
+
+section {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    border-radius: 8px;
+    background-color: #2a344a;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+section:hover {
+    transform: translateY(-5px);
+}
+
+h1, h2, h3 {
+    color: #8a2be2; /* violet */
+    border-bottom: 2px solid #8a2be2;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+a {
+    color: #8a2be2; /* violet */
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+    background-color: #111;
+    border-top: 1px solid #8a2be2;
+}
+
+#hero {
+    text-align: center;
+    background: linear-gradient(rgba(28, 35, 51, 0.8), rgba(28, 35, 51, 0.8)), url('https://source.unsplash.com/random/1600x900/?abstract');
+    background-size: cover;
+    background-position: center;
+    padding: 4rem 2rem;
+    border: none;
+    box-shadow: none;
+}
+
+#hero:hover {
+    transform: none;
+}
+
+#hero h1 {
+    font-size: 3rem;
+    border: none;
+}
+
+#games, #apps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.game-container, .app-container {
+    background-color: #1c2333;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#projects-container, #tic-tac-toe-board, #chess-board, #calculator, #search-results {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #1c2333;
+    border-radius: 5px;
+    min-height: 100px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #808080; /* grey */
+    background-color: #2a344a;
+    color: #f0f0f0;
+    box-sizing: border-box;
+}
+
+/* Project cards styling */
+#projects .project-card {
+    background-color: #1c2333;
+    border: 1px solid #8a2be2;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+#projects .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+}
+
+#projects .project-card h3 a {
+    text-decoration: none;
+    color: #8a2be2;
+}
+
+#projects .project-card p {
+    color: #f0f0f0;
+    flex-grow: 1; /* Makes p take available space */
+}
+
+#projects .project-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #808080; /* grey */
+}
+
+/* --- Game Styling --- */
+.game-status {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    min-height: 20px;
+    font-weight: bold;
+}
+
+.restart-btn {
+    display: block;
+    margin: 20px auto 0;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #8a2be2;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.restart-btn:hover {
+    background-color: #6a1eae;
+}
+
+/* Tic-Tac-Toe game styling */
+#tic-tac-toe-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    max-width: 300px;
+    margin: 0 auto;
+    aspect-ratio: 1 / 1;
+}
+
+.tic-tac-toe-cell {
+    background-color: #2a344a;
+    border: 2px solid #8a2be2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: white;
+}
+
+.tic-tac-toe-cell:hover {
+    background-color: #3e4a6a;
+}
+
+/* Chess game styling */
+#chess-board {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    max-width: 400px;
+    margin: 20px auto;
+    border: 5px solid #6a1eae;
+    aspect-ratio: 1 / 1;
+}
+
+.chess-square {
+    width: 100%;
+    height: 100%;
+}
+
+.chess-square.light {
+    background-color: #f0d9b5;
+}
+
+.chess-square.dark {
+    background-color: #b58863;
+}
+
+/* Calculator App Styling */
+.calculator {
+    max-width: 300px;
+    margin: 0 auto;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    background-color: #1c2333;
+}
+
+.calculator-display {
+    background-color: #2a344a;
+    color: white;
+    font-size: 2.5rem;
+    text-align: right;
+    padding: 20px 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.calculator-keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.calculator-keys button {
+    height: 60px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    background-color: #3e4a6a;
+    color: white;
+    transition: background-color 0.2s;
+}
+
+.calculator-keys button:hover {
+    background-color: #4a5a7a;
+}
+
+.key--operator {
+    background-color: #8a2be2;
+}
+.key--operator:hover {
+    background-color: #9a3be2;
+}
+
+.key--equal {
+    background-color: #6a1eae;
+}
+.key--equal:hover {
+    background-color: #7a2eae;
+}
+
+.key--zero {
+    grid-column: span 2;
+}
+
+/* Search highlight styling */
+mark {
+    background-color: #8a2be2;
+    color: white;
+    padding: 2px;
+    border-radius: 3px;
+}
