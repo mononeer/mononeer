@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chess - Rendani Manugeni</title>
-    <link rel="stylesheet" href="../../css/style.css">
+    <title>Project Details - Rendani Manugeni</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <header>
@@ -22,12 +22,11 @@
     </header>
 
     <main>
-        <section id="games">
-            <h2>Chess</h2>
-            <div class="game-container-full">
-                <div id="chess-status" class="game-status">Turn: White</div>
-                <div id="chess-board" class="game-board"></div>
-            </div>
+        <section id="project-details-container">
+            <!-- Project details will be loaded here by JavaScript -->
+            <h2 id="project-title">Loading project...</h2>
+            <p id="project-description"></p>
+            <div id="project-readme" class="readme-content"></div>
         </section>
     </main>
 
@@ -35,7 +34,8 @@
         <p>&copy; 2024 Rendani Manugeni. All rights reserved.</p>
     </footer>
 
-    <script src="../../js/chess.js"></script>
-    <script src="../../js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+    <script src="../js/project-detail.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 </html>

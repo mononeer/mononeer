@@ -70,6 +70,7 @@ function initializeChessGame() {
     let selectedSquare = null;
     let currentPlayer = 'white'; // White starts
     let isGameOver = false;
+    let playerVsAiMode = true; // Default to playing against AI
 
     function handleSquareClick(event) {
         if (isGameOver) return;
@@ -209,6 +210,16 @@ function initializeChessGame() {
         updateStatus();
         updateBoardView(fromR, fromC, toR, toC);
         checkGameState();
+
+        if (playerVsAiMode && currentPlayer === 'black' && !isGameOver) {
+            // Use a timeout to make the AI's move feel less instantaneous
+            setTimeout(() => {
+                const aiMove = getAiMove();
+                if (aiMove) {
+                    movePiece(aiMove.from.r, aiMove.from.c, aiMove.to.r, aiMove.to.c);
+                }
+            }, 500); // 0.5 second delay
+        }
     }
 
     function updateStatus() {
@@ -413,5 +424,57 @@ function initializeChessGame() {
             }
         }
         return null;
+    }
+
+    // --- AI Logic ---
+    const pieceValues = {
+        'pawn': 10, 'knight': 30, 'bishop': 30, 'rook': 50, 'queen': 90, 'king': 900
+    };
+
+    function evaluateBoard(board) {
+        let totalScore = 0;
+        for (let r = 0; r < 8; r++) {
+            for (let c = 0; c < 8; c++) {
+                const piece = board[r][c];
+                if (piece) {
+                    totalScore += (piece.color === 'white' ? pieceValues[piece.type] : -pieceValues[piece.type]);
+                }
+            }
+        }
+        return totalScore;
+    }
+
+    function getAiMove() {
+        let bestMove = null;
+        let bestScore = Infinity; // Black (AI) wants to find the lowest score
+
+        for (let r = 0; r < 8; r++) {
+            for (let c = 0; c < 8; c++) {
+                const piece = boardState[r][c];
+                if (piece && piece.color === 'black') {
+                    const moves = getValidMoves(piece, r, c);
+                    for (const move of moves) {
+                        const [toR, toC] = move;
+
+                        // Simulate the move to evaluate the resulting board state
+                        const originalDestPiece = boardState[toR][toC];
+                        boardState[toR][toC] = piece;
+                        boardState[r][c] = null;
+
+                        const score = evaluateBoard(boardState);
+
+                        // Undo the move to restore the board state
+                        boardState[r][c] = piece;
+                        boardState[toR][toC] = originalDestPiece;
+
+                        if (score < bestScore) {
+                            bestScore = score;
+                            bestMove = { from: { r, c }, to: { r: toR, c: toC }, piece };
+                        }
+                    }
+                }
+            }
+        }
+        return bestMove;
     }
 }
