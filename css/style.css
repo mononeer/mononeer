@@ -1,472 +1,243 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
-body {
-    background-color: #121212; /* Darker background */
-    background-image: radial-gradient(circle at 1px 1px, rgba(138, 43, 226, 0.05) 1px, transparent 0);
-    background-size: 25px 25px;
-    color: #f0f0f0; /* light grey for text */
-    font-family: 'Poppins', sans-serif;
+:root {
+    --color-background: #0A0A0A;
+    --color-surface: #1A1A1A;
+    --color-primary-text: #EAEAEA;
+    --color-secondary-text: #A0A0A0;
+    --color-border: #2A2A2A;
+    --color-accent: #FFFFFF;
+    --font-family-base: 'Poppins', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+body {
+    background-color: var(--color-background);
+    color: var(--color-primary-text);
+    font-family: var(--font-family-base);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
 }
 
 header {
-    background-color: #111;
-    padding: 1rem;
+    padding: 2rem;
     text-align: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 1px solid #8a2be2;
 }
 
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin: 0 15px;
-}
-
-nav a {
-    color: #f0f0f0;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-nav a:hover {
-    color: #8a2be2; /* violet */
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--color-accent);
 }
 
 main {
-    padding: 2rem;
+    padding: 0 2rem 2rem 2rem;
 }
 
 section {
-    margin-bottom: 3rem;
-    padding: 2rem;
-    border-radius: 15px; /* more rounded corners */
-    background-color: rgba(28, 35, 51, 0.6); /* Slightly more opaque */
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px); /* For Safari */
-    border: 1px solid rgba(138, 43, 226, 0.1); /* Even more subtle border */
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    transition: transform 0.4s ease, filter 0.4s ease;
-}
-
-section:hover:not(#games):not(#apps) {
-    transform: translateY(-5px);
-    filter: grayscale(100%);
-}
-
-h1, h2, h3 {
-    color: #8a2be2; /* violet */
-    border-bottom: 2px solid #8a2be2;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-}
-
-a {
-    color: #8a2be2; /* violet */
-}
-
-a:hover {
-    text-decoration: underline;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 footer {
+    padding: 2rem;
     text-align: center;
-    padding: 1rem;
-    margin-top: 2rem;
-    background-color: #111;
-    border-top: 1px solid #8a2be2;
+    color: var(--color-secondary-text);
 }
 
-#hero {
-    text-align: center;
-    background: linear-gradient(135deg, #1c2333 0%, #2a344a 100%);
-    padding: 4rem 2rem;
-    border-radius: 8px; /* Match other sections */
+.social-links {
+    margin-bottom: 1rem;
 }
 
-#hero:hover {
-    transform: none;
+.social-links a {
+    color: var(--color-secondary-text);
+    text-decoration: none;
+    margin: 0 15px;
+    transition: color 0.3s ease;
 }
 
-#hero h1 {
-    font-size: 3rem;
-    border: none;
+.social-links a:hover {
+    color: var(--color-accent);
 }
 
-#games, #apps {
+/* New Gallery Styling */
+.gallery-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
-.game-container, .app-container {
-    background-color: #1c2333;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-#projects-container, #tic-tac-toe-board, #chess-board, #calculator, #search-results {
-    margin-top: 1rem;
-    padding: 1rem;
-    background-color: #1c2333;
-    border-radius: 5px;
-    min-height: 100px;
-}
-
-input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #808080; /* grey */
-    background-color: #2a344a;
-    color: #f0f0f0;
-    box-sizing: border-box;
-}
-
-/* Project cards styling */
-#projects .project-card {
-    background-color: #1c2333;
-    border: 1px solid #8a2be2;
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-#projects .project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
-}
-
-#projects .project-card h3 a {
+.gallery-item {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 2rem;
     text-decoration: none;
-    color: #8a2be2;
+    color: var(--color-primary-text);
+    transition: transform 0.4s ease, border-color 0.4s ease, filter 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: galleryItemFadeIn 0.5s ease-in-out forwards;
+    filter: grayscale(100%);
 }
 
-#projects .project-card p {
-    color: #f0f0f0;
-    flex-grow: 1; /* Makes p take available space */
+@keyframes galleryItemFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-#projects .project-footer {
+.gallery-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-accent);
+    filter: grayscale(0%);
+}
+
+.gallery-item-type {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-secondary-text);
+    text-transform: uppercase;
+}
+
+.gallery-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-accent);
+}
+
+.gallery-item p {
+    color: var(--color-secondary-text);
+}
+
+.project-footer {
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
     font-size: 0.9rem;
-    color: #808080; /* grey */
+    color: var(--color-secondary-text);
 }
 
-/* --- Game Styling --- */
-.game-status {
+/* Hero Section */
+#hero {
     text-align: center;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    min-height: 20px;
-    font-weight: bold;
-}
-
-.restart-btn {
-    display: block;
-    margin: 20px auto 0;
-    padding: 10px 20px;
-    border-radius: 5px;
-    background-color: #8a2be2;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s;
-}
-
-.restart-btn:hover {
-    background-color: #6a1eae;
-}
-
-/* Tic-Tac-Toe game styling */
-#tic-tac-toe-board {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    gap: 10px;
-    max-width: 300px;
-    margin: 0 auto;
-    aspect-ratio: 1 / 1;
-}
-
-.tic-tac-toe-cell {
-    background-color: #2a344a;
-    border: 2px solid #8a2be2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 3rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    color: white;
-}
-
-.tic-tac-toe-cell:hover {
-    background-color: #3e4a6a;
-}
-
-/* Chess game styling */
-#chess-board {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-    max-width: 400px;
-    margin: 20px auto;
-    border: 5px solid #6a1eae;
-    aspect-ratio: 1 / 1;
-}
-
-.chess-square {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.chess-square.light {
-    background-color: #f0d9b5;
-}
-
-.chess-square.dark {
-    background-color: #b58863;
-}
-
-/* Calculator App Styling */
-.calculator {
-    max-width: 300px;
-    margin: 0 auto;
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    background-color: #1c2333;
-}
-
-.calculator-display {
-    background-color: #2a344a;
-    color: white;
-    font-size: 2.5rem;
-    text-align: right;
-    padding: 20px 10px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    word-wrap: break-word;
-    word-break: break-all;
-}
-
-.calculator-keys {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-}
-
-.calculator-keys button {
-    height: 60px;
-    border-radius: 5px;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    background-color: #3e4a6a;
-    color: white;
-    transition: background-color 0.2s;
-}
-
-.calculator-keys button:hover {
-    background-color: #4a5a7a;
-}
-
-.key--operator {
-    background-color: #8a2be2;
-}
-.key--operator:hover {
-    background-color: #9a3be2;
-}
-
-.key--equal {
-    background-color: #6a1eae;
-}
-.key--equal:hover {
-    background-color: #7a2eae;
-}
-
-.key--zero {
-    grid-column: span 2;
+    padding: 4rem 2rem;
 }
 
 .profile-picture {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    border: 5px solid #8a2be2; /* violet */
-    margin-bottom: 20px;
-    object-fit: cover;
-    box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+    border: 3px solid var(--color-accent);
+    margin-bottom: 1.5rem;
 }
 
-/* Search highlight styling */
-mark {
-    background-color: #8a2be2;
-    color: white;
-    padding: 2px;
-    border-radius: 3px;
-}
-
-.chess-piece {
-    font-size: 36px; /* Adjust size as needed */
-    line-height: 1;
-    user-select: none; /* Prevent text selection */
-    -webkit-user-select: none;
-    cursor: grab;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-}
-
-.chess-square.selected {
-    background-color: #8a2be2 !important; /* A strong highlight */
-    box-shadow: inset 0 0 10px #00000080;
-}
-
-.valid-move {
-    position: relative;
-}
-
-.valid-move::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 30%;
-    height: 30%;
-    border-radius: 50%;
-    background-color: rgba(138, 43, 226, 0.5);
-    pointer-events: none; /* Allows clicking through the dot */
-}
-
-.chess-square.in-check {
-    background-color: #ff4d4d !important;
-    box-shadow: inset 0 0 10px #00000080;
-}
-
-/* Gallery Styling */
-.gallery-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-}
-
-.gallery-item {
-    display: block;
-    background-color: #2a344a;
-    padding: 2rem;
-    border-radius: 10px;
-    text-decoration: none;
-    color: #f0f0f0;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.gallery-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-}
-
-.gallery-item h3 {
-    color: #8a2be2;
-    border-bottom: none;
-    margin-top: 0;
-}
-
-.search-container {
-    padding: 0 1rem 1rem 1rem;
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-/* Todo List App Styling */
-.todo-container {
+#hero p {
+    font-size: 1.25rem;
     max-width: 600px;
     margin: 0 auto;
+    color: var(--color-secondary-text);
 }
 
-#todo-form {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 2rem;
+/* Detail Pages & Game Pages */
+.game-container-full, .app-container-full, #project-details-container {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 2rem;
+    max-width: 900px;
+    margin: 2rem auto;
 }
 
+.readme-content h1, .readme-content h2, .readme-content h3 {
+    color: var(--color-accent);
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.5rem;
+}
+.readme-content p {
+    margin-bottom: 1rem;
+}
+.readme-content a {
+    color: var(--color-accent);
+}
+.readme-content code {
+    background-color: var(--color-background);
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+}
+.readme-content pre {
+    background-color: var(--color-background);
+    padding: 1rem;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+/* Re-skinning existing apps */
+.game-board, .calculator {
+    border-color: var(--color-border);
+}
+.tic-tac-toe-cell, .calculator-keys button {
+    background-color: var(--color-background);
+    border-color: var(--color-border);
+}
+.tic-tac-toe-cell:hover, .calculator-keys button:hover {
+    background-color: #252525;
+}
+#chess-board {
+    border-color: var(--color-border);
+}
+.chess-square.light { background-color: #444; }
+.chess-square.dark { background-color: var(--color-surface); }
+.chess-square.selected { background-color: #555 !important; }
+.valid-move::after { background-color: rgba(255, 255, 255, 0.3); }
+.chess-square.in-check { background-color: #600 !important; }
+
+.restart-btn, #todo-form button {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-primary-text);
+}
+.restart-btn:hover, #todo-form button:hover {
+    background-color: var(--color-accent);
+    color: var(--color-background);
+    border-color: var(--color-accent);
+}
 #todo-input {
-    flex-grow: 1;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #808080;
-    background-color: #2a344a;
-    color: #f0f0f0;
-    font-size: 1rem;
+    background-color: var(--color-background);
+    border-color: var(--color-border);
 }
-
-#todo-form button {
-    padding: 10px 20px;
-    border-radius: 5px;
-    background-color: #8a2be2;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s;
-}
-
-#todo-form button:hover {
-    background-color: #6a1eae;
-}
-
-#todo-list {
-    list-style: none;
-    padding: 0;
-}
-
 #todo-list li {
-    background-color: #2a344a;
-    padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: all 0.3s;
-    word-break: break-all;
+    background-color: var(--color-surface);
+    border-color: var(--color-border);
 }
-
 #todo-list li.completed {
-    text-decoration: line-through;
-    opacity: 0.6;
-    background-color: #1c2333;
+    background-color: #111;
 }
-
 #todo-list .delete-btn {
-    background-color: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: 15px;
-    transition: background-color 0.3s;
+    background-color: #500;
 }
-
 #todo-list .delete-btn:hover {
-    background-color: #cc0000;
+    background-color: #800;
 }
