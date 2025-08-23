@@ -63,6 +63,12 @@ async function buildUnifiedGallery() {
             name: 'Todo List',
             description: 'A useful app to keep track of your tasks.',
             url: '/games/todo/'
+        },
+        {
+            type: 'App',
+            name: 'Markdown Editor',
+            description: 'A real-time Markdown previewer for developers.',
+            url: '/games/markdown/'
         }
     ];
 

@@ -1,7 +1,6 @@
 // --- Self-contained Chess Game Logic for mononeer.com ---
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Only initialize the game if the chess board element exists on the page
     if (document.getElementById('chess-board')) {
         initializeChessGame();
     }
@@ -11,14 +10,12 @@ function initializeChessGame() {
     const chessBoardElement = document.getElementById('chess-board');
     const gameStatusElement = document.getElementById('chess-status');
 
-    // --- Game State Variables ---
     let boardState = [];
     let currentPlayer = 'white';
     let selectedSquare = null;
     let isGameOver = false;
     let playerVsAiMode = true;
 
-    // --- Constants ---
     const initialBoardSetup = [
         ['rook', 'knight', 'bishop', 'queen', 'king', 'bishop', 'knight', 'rook'],
         ['pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn'],
@@ -35,16 +32,11 @@ function initializeChessGame() {
         'pawn': 10, 'knight': 30, 'bishop': 30, 'rook': 50, 'queen': 90, 'king': 900
     };
 
-    // --- Core Game Flow ---
-
-    function setupInitialBoard() {
+    function setupAndRender() {
         boardState = initialBoardSetup.map((row, rowIndex) => {
             const color = rowIndex < 2 ? 'black' : 'white';
             return row.map(type => type ? { type, color } : null);
         });
-    }
-
-    function renderBoard() {
         chessBoardElement.innerHTML = '';
         for (let r = 0; r < 8; r++) {
             for (let c = 0; c < 8; c++) {
@@ -54,11 +46,12 @@ function initializeChessGame() {
                 square.dataset.col = c;
                 const piece = boardState[r][c];
                 if (piece) {
-                    square.innerHTML = `<span class="chess-piece" style="color: ${piece.color === 'white' ? '#EEE' : '#333'}">${pieceUnicode[piece.type][piece.color]}</span>`;
+                    square.innerHTML = `<span class="chess-piece">${pieceUnicode[piece.type][piece.color]}</span>`;
                 }
                 chessBoardElement.appendChild(square);
             }
         }
+        updateStatus();
     }
 
     function handleSquareClick(event) {
@@ -93,18 +86,16 @@ function initializeChessGame() {
         checkGameState();
 
         if (playerVsAiMode && currentPlayer === 'black' && !isGameOver) {
-            setTimeout(makeAiMove, 500);
+            setTimeout(makeAiMove, 250);
         }
     }
 
     function makeAiMove() {
-        const aiMove = getAiMove();
+        const aiMove = findBestMove();
         if (aiMove) {
             movePiece(aiMove.from.r, aiMove.from.c, aiMove.to.r, aiMove.to.c);
         }
     }
-
-    // --- UI Update Functions ---
 
     function selectPiece(square) {
         clearHighlights();
@@ -135,33 +126,35 @@ function initializeChessGame() {
 
     function updateStatus(text) {
         let statusText = text || `Turn: ${currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1)}`;
+        document.querySelectorAll('.in-check').forEach(s => s.classList.remove('in-check'));
         if (!text && isKingInCheck(currentPlayer)) {
             statusText += ' - Check!';
             const kingPos = findKing(currentPlayer);
-            document.querySelectorAll('.in-check').forEach(s => s.classList.remove('in-check'));
             if (kingPos) document.querySelector(`[data-row='${kingPos.r}'][data-col='${kingPos.c}']`)?.classList.add('in-check');
         }
         gameStatusElement.textContent = statusText;
     }
 
-    // --- Game State & Rules Logic ---
-
     function checkGameState() {
-        if (playerHasLegalMoves(currentPlayer)) return;
+        if (getAllLegalMoves(currentPlayer).length > 0) return;
         isGameOver = true;
         updateStatus(isKingInCheck(currentPlayer) ? `Checkmate! ${currentPlayer === 'white' ? 'Black' : 'White'} wins.` : 'Stalemate! Game is a draw.');
     }
 
-    function playerHasLegalMoves(playerColor) {
+    function getAllLegalMoves(playerColor) {
+        const allMoves = [];
         for (let r = 0; r < 8; r++) {
             for (let c = 0; c < 8; c++) {
                 const piece = boardState[r][c];
-                if (piece && piece.color === playerColor && getValidMoves(piece, r, c).length > 0) {
-                    return true;
+                if (piece && piece.color === playerColor) {
+                    const moves = getValidMoves(piece, r, c);
+                    if (moves.length > 0) {
+                        allMoves.push(...moves.map(m => ({from: {r,c}, to: {r:m[0], c:m[1]}})));
+                    }
                 }
             }
         }
-        return false;
+        return allMoves;
     }
 
     function getValidMoves(piece, r, c) {
@@ -205,19 +198,9 @@ function initializeChessGame() {
     }
 
     function getPseudoLegalMoves(piece, r, c) {
-        // Piece-specific move logic (rook, knight, bishop, queen, king, pawn)...
-        // This is a simplified placeholder for the large switch statement
         const moves = [];
         const color = piece.color;
-        const addMove = (toR, toC, canCapture) => {
-            if (toR < 0 || toR >= 8 || toC < 0 || toC >= 8) return;
-            const destPiece = boardState[toR][toC];
-            if (destPiece) {
-                if (destPiece.color !== color && canCapture) moves.push([toR, toC]);
-            } else {
-                if (!canCapture) moves.push([toR, toC]);
-            }
-        };
+
         const addSlidingMoves = (directions) => {
              for (const [dr, dc] of directions) {
                 for (let i = 1; i < 8; i++) {
@@ -237,63 +220,126 @@ function initializeChessGame() {
             case 'pawn':
                 const dir = color === 'white' ? -1 : 1;
                 const startRow = color === 'white' ? 6 : 1;
-                if (!boardState[r + dir][c]) {
+                if (r + dir >= 0 && r + dir < 8 && !boardState[r + dir][c]) {
                     moves.push([r + dir, c]);
-                    if (r === startRow && !boardState[r + 2 * dir][c]) moves.push([r + 2 * dir, c]);
+                    if (r === startRow && !boardState[r + 2 * dir][c]) {
+                        moves.push([r + 2 * dir, c]);
+                    }
                 }
                 [-1, 1].forEach(dc => {
-                    if (c + dc >= 0 && c + dc < 8 && boardState[r + dir][c + dc] && boardState[r + dir][c + dc].color !== color) {
-                        moves.push([r + dir, c + dc]);
+                    if (c + dc >= 0 && c + dc < 8 && r + dir >= 0 && r + dir < 8) {
+                        const destPiece = boardState[r+dir][c+dc];
+                        if (destPiece && destPiece.color !== color) {
+                            moves.push([r + dir, c + dc]);
+                        }
                     }
                 });
                 break;
-            case 'rook': addSlidingMoves([[-1, 0], [1, 0], [0, -1], [0, 1]]); break;
-            case 'knight': [[-2, -1], [-2, 1], [-1, -2], [-1, 2], [1, -2], [1, 2], [2, -1], [2, 1]].forEach(([dr, dc]) => addMove(r + dr, c + dc, true)); break;
-            case 'bishop': addSlidingMoves([[-1, -1], [-1, 1], [1, -1], [1, 1]]); break;
-            case 'queen': addSlidingMoves([[-1, -1], [-1, 1], [1, -1], [1, 1], [-1, 0], [1, 0], [0, -1], [0, 1]]); break;
-            case 'king': [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]].forEach(([dr, dc]) => addMove(r + dr, c + dc, true)); break;
+            case 'rook':
+                addSlidingMoves([[-1, 0], [1, 0], [0, -1], [0, 1]]);
+                break;
+            case 'knight':
+                [[-2, -1], [-2, 1], [-1, -2], [-1, 2], [1, -2], [1, 2], [2, -1], [2, 1]].forEach(([dr, dc]) => {
+                    const toR = r + dr, toC = c + dc;
+                    if (toR >= 0 && toR < 8 && toC >= 0 && toC < 8) {
+                        const destPiece = boardState[toR][toC];
+                        if (!destPiece || destPiece.color !== color) moves.push([toR, toC]);
+                    }
+                });
+                break;
+            case 'bishop':
+                addSlidingMoves([[-1, -1], [-1, 1], [1, -1], [1, 1]]);
+                break;
+            case 'queen':
+                addSlidingMoves([[-1, -1], [-1, 1], [1, -1], [1, 1], [-1, 0], [1, 0], [0, -1], [0, 1]]);
+                break;
+            case 'king':
+                [[-1, -1], [-1, 1], [1, -1], [1, 1], [-1, 0], [1, 0], [0, -1], [0, 1]].forEach(([dr, dc]) => {
+                    const toR = r + dr, toC = c + dc;
+                     if (toR >= 0 && toR < 8 && toC >= 0 && toC < 8) {
+                        const destPiece = boardState[toR][toC];
+                        if (!destPiece || destPiece.color !== color) moves.push([toR, toC]);
+                    }
+                });
+                break;
         }
         return moves;
     }
 
-    // --- AI Logic ---
-    function getAiMove() {
+    function findBestMove() {
         let bestMove = null;
-        let bestScore = Infinity;
-        for (let r = 0; r < 8; r++) {
-            for (let c = 0; c < 8; c++) {
-                const piece = boardState[r][c];
-                if (piece?.color === 'black') {
-                    for (const move of getValidMoves(piece, r, c)) {
-                        const [toR, toC] = move;
-                        const originalDestPiece = boardState[toR][toC];
-                        boardState[toR][toC] = piece;
-                        boardState[r][c] = null;
-                        const score = evaluateBoard(boardState);
-                        boardState[r][c] = piece;
-                        boardState[toR][toC] = originalDestPiece;
-                        if (score < bestScore) {
-                            bestScore = score;
-                            bestMove = { from: { r, c }, to: { r: toR, c: toC } };
-                        }
-                    }
-                }
+        let bestValue = Infinity;
+        const depth = 2;
+
+        const allMoves = getAllLegalMoves('black');
+        if (allMoves.length === 0) return null;
+
+        for (const move of allMoves) {
+            const { from, to } = move;
+            const originalDestPiece = boardState[to.r][to.c];
+            boardState[to.r][to.c] = boardState[from.r][from.c];
+            boardState[from.r][from.c] = null;
+
+            const boardValue = minimax(depth - 1, -Infinity, Infinity, true);
+
+            boardState[from.r][from.c] = boardState[to.r][to.c];
+            boardState[to.r][to.c] = originalDestPiece;
+
+            if (boardValue < bestValue) {
+                bestValue = boardValue;
+                bestMove = move;
             }
         }
         return bestMove;
     }
 
-    function evaluateBoard(board) {
+    function minimax(depth, alpha, beta, isMaximizingPlayer) {
+        if (depth === 0) return evaluateBoard();
+
+        const moves = getAllLegalMoves(isMaximizingPlayer ? 'white' : 'black');
+        if (moves.length === 0) return evaluateBoard();
+
+        if (isMaximizingPlayer) {
+            let maxEval = -Infinity;
+            for (const move of moves) {
+                const { from, to } = move;
+                const originalDestPiece = boardState[to.r][to.c];
+                boardState[to.r][to.c] = boardState[from.r][from.c];
+                boardState[from.r][from.c] = null;
+                const eval = minimax(depth - 1, alpha, beta, false);
+                boardState[from.r][from.c] = boardState[to.r][to.c];
+                boardState[to.r][to.c] = originalDestPiece;
+                maxEval = Math.max(maxEval, eval);
+                alpha = Math.max(alpha, eval);
+                if (beta <= alpha) break;
+            }
+            return maxEval;
+        } else {
+            let minEval = Infinity;
+            for (const move of moves) {
+                const { from, to } = move;
+                const originalDestPiece = boardState[to.r][to.c];
+                boardState[to.r][to.c] = boardState[from.r][from.c];
+                boardState[from.r][from.c] = null;
+                const eval = minimax(depth - 1, alpha, beta, true);
+                boardState[from.r][from.c] = boardState[to.r][to.c];
+                boardState[to.r][to.c] = originalDestPiece;
+                minEval = Math.min(minEval, eval);
+                beta = Math.min(beta, eval);
+                if (beta <= alpha) break;
+            }
+            return minEval;
+        }
+    }
+
+    function evaluateBoard() {
         let totalScore = 0;
-        board.forEach(row => row.forEach(piece => {
+        boardState.forEach(row => row.forEach(piece => {
             if (piece) totalScore += (piece.color === 'white' ? pieceValues[piece.type] : -pieceValues[piece.type]);
         }));
         return totalScore;
     }
 
-    // --- Initializer Kick-off ---
-    setupInitialBoard();
-    renderBoard();
+    setupAndRender();
     chessBoardElement.addEventListener('click', handleSquareClick);
-    updateStatus();
 }

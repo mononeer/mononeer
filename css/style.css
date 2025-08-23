@@ -25,6 +25,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     opacity: 0;
     animation: fadeIn 0.5s ease-in-out forwards;
+    cursor: none;
 }
 
 @keyframes fadeIn {
@@ -240,4 +241,87 @@ footer {
 }
 #todo-list .delete-btn:hover {
     background-color: #800;
+}
+
+/* Markdown Editor Styling */
+.markdown-editor-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    height: 70vh; /* 70% of the viewport height */
+}
+
+#markdown-input, #markdown-preview {
+    height: 100%;
+    padding: 1.5rem;
+    border-radius: 5px;
+    border: 1px solid var(--color-border);
+    overflow-y: auto;
+}
+
+#markdown-input {
+    background-color: var(--color-background);
+    color: var(--color-primary-text);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    resize: none; /* Disable manual resizing */
+}
+
+#markdown-preview {
+    background-color: var(--color-surface);
+}
+
+/* Custom Cursor Styling */
+.cursor-dot,
+.cursor-outline {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 9999;
+    mix-blend-mode: difference;
+}
+
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-accent);
+}
+
+.cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--color-accent);
+    transition: transform 0.2s ease-out, width 0.2s ease-out, height 0.2s ease-out, background-color 0.2s ease-out;
+}
+
+.cursor-outline.hover {
+    transform: translate(-50%, -50%) scale(1.5);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.search-container {
+    max-width: 600px;
+    margin: 2rem auto 0;
+    padding: 0 2rem;
+}
+
+#search-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+    color: var(--color-primary-text);
+    font-size: 1rem;
+    font-family: var(--font-family-base);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#search-input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
 }
